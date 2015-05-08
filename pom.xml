@@ -9,14 +9,20 @@
 
 	<properties>
 		<!-- hbase version here -->
-		<hbase_version>0.94.6-cdh4.5.0</hbase_version>
-		<hadoop_version>2.0.0-cdh4.5.0</hadoop_version>
-		<mr_version>2.0.0-mr1-cdh4.5.0</mr_version>
-		<hive_version>0.10.0-cdh4.5.0</hive_version>
+		<hbase_version>0.94.2-cdh4.2.0</hbase_version>
+		<hadoop_version>2.0.0-cdh4.2.0</hadoop_version>
+		<mr_version>2.0.0-mr1-cdh4.2.0</mr_version>
+		<hive_version>0.10.0-cdh4.2.0</hive_version>
 		<defaultSourceEncoding>UTF-8</defaultSourceEncoding>
 		<project.build.sourceEncoding>${defaultSourceEncoding}</project.build.sourceEncoding>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>cloudera</id>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -153,7 +159,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -178,59 +184,23 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			<!-- <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>script-dos2unix</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target name="script-dos2unix">
-								<property environment="env" />
-								<exec executable="${env.datadiv_buildenv_root}/windows/tools/dos2unix.exe"
-									dir="${webapp_deploy_tmp_root}/webapp/bip">
-									<arg value="-o" />
-									<arg value="bin/*" />
-								</exec>
-							</target>
-						</configuration>
-					</execution>
-					<execution>
-						<id>make-tgz-sha1</id>
-						<phase>package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target name="make-tgz-sha1">
-								<property environment="env" />
-								<exec executable="${env.datadiv_buildenv_root}/windows/tools/sha1sum.exe"
-									dir="${webapp_deploy_root}"
-									output="${webapp_deploy_root}/webapp-${project.version}.${build_number}-install.tar.gz.sha1">
-									<arg value="webapp-${project.version}.${build_number}-install.tar.gz" />
-								</exec>
-								<exec executable="${env.datadiv_buildenv_root}/windows/tools/dos2unix.exe"
-									dir="${webapp_deploy_root}">
-									<arg value="-o" />
-									<arg
-										value="webapp-${project.version}.${build_number}-install.tar.gz.sha1" />
-								</exec>
-								cleanup all tmp-dirs
-								<exec executable="cmd.exe" dir="${webapp_deploy_root}">
-									<arg value="/c" />
-									<arg value="rmdir /S /Q ${webapp_deploy_tmp_root_dirname}" />
-								</exec>
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
-			
+
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> 
+				<executions> <execution> <id>script-dos2unix</id> <phase>package</phase> 
+				<goals> <goal>run</goal> </goals> <configuration> <target name="script-dos2unix"> 
+				<property environment="env" /> <exec executable="${env.datadiv_buildenv_root}/windows/tools/dos2unix.exe" 
+				dir="${webapp_deploy_tmp_root}/webapp/bip"> <arg value="-o" /> <arg value="bin/*" 
+				/> </exec> </target> </configuration> </execution> <execution> <id>make-tgz-sha1</id> 
+				<phase>package</phase> <goals> <goal>run</goal> </goals> <configuration> 
+				<target name="make-tgz-sha1"> <property environment="env" /> <exec executable="${env.datadiv_buildenv_root}/windows/tools/sha1sum.exe" 
+				dir="${webapp_deploy_root}" output="${webapp_deploy_root}/webapp-${project.version}.${build_number}-install.tar.gz.sha1"> 
+				<arg value="webapp-${project.version}.${build_number}-install.tar.gz" /> 
+				</exec> <exec executable="${env.datadiv_buildenv_root}/windows/tools/dos2unix.exe" 
+				dir="${webapp_deploy_root}"> <arg value="-o" /> <arg value="webapp-${project.version}.${build_number}-install.tar.gz.sha1" 
+				/> </exec> cleanup all tmp-dirs <exec executable="cmd.exe" dir="${webapp_deploy_root}"> 
+				<arg value="/c" /> <arg value="rmdir /S /Q ${webapp_deploy_tmp_root_dirname}" 
+				/> </exec> </target> </configuration> </execution> </executions> </plugin> -->
+
 		</plugins>
 	</build>
 </project>
